@@ -1,0 +1,33 @@
+var have = document.getElementById("have");
+var want = document.getElementById("want");
+var finl = document.getElementById("final");
+var need = document.getElementById("need");
+function checkIfCanCalculate()
+{
+  if (have.value != "" && want.value != "" && finl.value != "") {
+    return true;
+  }
+  else {
+    need.value = "";
+    return false;
+  }
+}
+function calculateIt()
+{
+  if (checkIfCanCalculate()) {
+    var needed = (Number(want.value) - (Number(have.value) * (1 - 0.01 * Number(finl.value)))) / Number(finl.value) * 100;
+    need.value = (needed + "").substring(0,5);
+  }
+}
+document.getElementById("calculate").onclick = function () {
+  calculateIt();
+}
+have.onblur = have.onupdate = function () {
+  calculateIt();
+}
+want.onblur = want.onupdate = function () {
+  calculateIt();
+}
+finl.onblur = finl.onupdate = function () {
+  calculateIt();
+}
